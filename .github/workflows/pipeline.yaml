@@ -1,43 +1,43 @@
 name: "Estrutura de Diretorios e Arquivos"
-  on:
-    push:
-      branches: [ main ]
-    workflow_dispatch:
 
-    env:
-      NODE_VERSION: "18"
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
 
-    jobs:
-      demonstrando_estrutura:
-        name: "Demostrar Estrutura Basica"
-        runs-on: ubuntu-latest
+  env:
+    NODE_VERSION: "18"
 
-        steps:
-          - name: "Checkout do codigo"
-            uses: actions/checkout@v4
-          
-          - name: "Mostrar Estrutura .github/workflows"
+  jobs:
+    demonstrando_estrutura:
+      name: "Demostrar Estrutura Basica"
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: "Checkout do codigo"
+          uses: actions/checkout@v4
+        
+        - name: "Mostrar Estrutura .github/workflows"
+          run: 
+            echo "== Estrutura do Diretório .github/workflows == "
+            ls -la .github/workflows
+            echo "  "
+            echo "Total de Workflows encontrados: $(ls -1 .github/workflows/*.yaml | wc -l)"
+
+          - name: "Elementos Obrigatorios do worflow"
             run: 
-              echo "== Estrutura do Diretório .github/workflows == "
-              ls -la .github/workflows
-              echo "  "
-              echo "Total de Workflows encontrados: $(ls -1 .github/workflows/*.yaml | wc -l)"
+              echo "== Elementos Obrigatorios do Workflow ==" 
+              echo "1. name: Nome do workflow"
+              echo "2. on: Evento que dispara o workflow (ex: push, pull_request, workflow_dispatch)"
+              echo "3. jobs: Conjunto de tarefas a serem executadas"
+              echo "4. runs-on: Ambiente onde o job será executado (ex: ubuntu latest)"
+              echo "5. steps: Passos individuais dentro de cada job"
 
-            - name: "Elementos Obrigatorios do worflow"
-              run: 
-                echo "== Elementos Obrigatorios do Workflow ==" 
-                echo "1. name: Nome do workflow"
-                echo "2. on: Evento que dispara o workflow (ex: push, pull_request, workflow_dispatch)"
-                echo "3. jobs: Conjunto de tarefas a serem executadas"
-                echo "4. runs-on: Ambiente onde o job será executado (ex: ubuntu latest)"
-                echo "5. steps: Passos individuais dentro de cada job"
-
-            - name: "Variaveis e Contexto"
-              run: 
-                echo "== Variaveis e Contexto ==" 
-                echo "1. env: Variáveis de ambiente para o workflow"
-                echo "2. github: Contexto do GitHub (ex: github.repository, github.actor)"
-                echo "3. secrets: Variáveis de ambiente seguras (ex: secrets.GITHUB_TOKEN)"
-                echo "4. runner: Informações sobre o ambiente de execução (ex: runner.os, runner.arch)"
-                echo "5. job: Informações sobre o job atual (ex: job.status, job.id)"
-                
+          - name: "Variaveis e Contexto"
+            run: 
+              echo "== Variaveis e Contexto ==" 
+              echo "1. env: Variáveis de ambiente para o workflow"
+              echo "2. github: Contexto do GitHub (ex: github.repository, github.actor)"
+              echo "3. secrets: Variáveis de ambiente seguras (ex: secrets.GITHUB_TOKEN)"
+              echo "4. runner: Informações sobre o ambiente de execução (ex: runner.os, runner.arch)"
+              echo "5. job: Informações sobre o job atual (ex: job.status, job.id)"
