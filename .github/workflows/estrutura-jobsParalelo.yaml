@@ -1,0 +1,53 @@
+name: jobs Paralelos
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  # Job 1
+  code-analysis:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkot codigo
+      uses: actions/checkout@v4
+
+    - name: Analise de sintaxe
+      run: |
+        echo "Analisando sintaxe de codigo..."
+        sleep 3
+        echo "Analise de codigo concluida"
+
+    - name: Verificar padroes de codigo
+      run: |
+        echo "Verificando padroes de codigo"
+        sleep 2
+        echo "padroes verificado"
+
+    - name: Upload relatorio Analise
+      run: |
+        echo "Fazedno upload do relatorio"
+        echo "Relatorio de Analise gerado em $(date)" > analysis-report.txt
+        echo "Relatorio Salvo"
+  
+  # Job 2
+  unit-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkot codigo
+      uses: actions/checkout@v4
+
+    - name: Configurar ambiente de testes
+      run: |
+        echo "Configurando ambiente"
+        sleep 2
+        echo "ambiente Configurado"
+
+    - name: Executar testes unitarios
+      run: |
+        echo "Executando testes unitarios"
+        sleep 4
+        echo "Todos os testes passaram (15/15)"
