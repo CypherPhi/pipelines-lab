@@ -1,0 +1,64 @@
+name: Variaveis de Ambiente
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Variaveis Globais
+env:
+  WORKFLOW_VAR: "Variavel definida no nivel Workflow"
+  AMBIENTE: "produção"
+  VERSAO_APP: "1.0.0"
+
+jobs:
+  demonstracao-Variaveis:
+    runs-on: ubuntu-latest
+
+    env:
+      JOB_VAR: "Variaveis do nivel JOB"
+      USUARIO: "devops-user"
+    
+    steps:
+      - name: Exibir Variaveis do Workflow
+        run: |
+          echo "===== Variaveis do Workflow ====="
+          echo "Variaveis do WORKFLOW_VAR: ${{ env.WORKFLOW_VAR }}"
+          echo "Ambiente: ${{ env.AMBIENTE }}"
+          echo "Versão da aplicação: ${{ env.VERSAO_APP }}"
+      
+      - name: Exibir Variaveis do JOB
+        run: |
+          echo "===== Variaveis do JOB ===="
+          echo "Variavel JOB_VAR: ${{ env.JOB_VAR }}"
+          echo "Usuario: ${{env.USUARIO}}"
+
+      - name: Exibir variaveis do step
+        env:
+          STEP_VAR: "Variavel de nivel step"
+          MENSAGEM: "Mensagem do step!"
+        run: |
+          echo "=== Variaveis do Step ==="
+          echo "Variavel STEP_VAR: ${{env.STEP_VAR}}"
+          echo "Mensagem: ${{env.MENSAGEM}}"
+
+      - name: Combinar as variaveis
+        env:
+          STEP_ESPECIFICO: "step_value"
+        run: |
+          echo "=== Combinação de Variaveis ==="
+          echo "Workflow: ${{env.WORKFLOW_VAR}}"
+          echo "job: ${{env.JOB_VAR}}"
+          echo "STep: ${{env.STEP_ESPECIFICO}}"
+
+      - name: Usar variaveis em comandos praticos
+        env:
+          NOME_PROJETO: "lab_variaveis"
+          TIMESTAMP: "2026-06-15"
+        run: |
+          echo "=== Exemplo Pratico ==="
+          echo "Compilando projeto: ${{env.NOME_PROJETO}}"
+          echo "Data da Build: ${{env.TIMESTAMP}}"
+          echo "Ambiente: ${{env.AMBIENTE}}"
+          echo "Versão: ${{env.VERSAO_APP}}"
+
