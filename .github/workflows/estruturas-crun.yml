@@ -1,3 +1,5 @@
+name: Crun
+
 on:
   schedule:
     # Executa todo dia as 21:55 (UTC + 3)
